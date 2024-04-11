@@ -1,0 +1,50 @@
+﻿<Application x:Class="Wpf_PasswordBox.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Wpf_PasswordBox"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <DrawingImage x:Key="img_Client_SDK_Controls_PasswordVisible" x:Shared="false">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V96 H96 V0 H0 Z">
+                    <DrawingGroup Opacity="1">
+                        <GeometryDrawing Geometry="F0 M96,96z M0,0z M38.5,17.5C55.5747,15.2454 69.7414,20.5787 81,33.5 83.9113,36.9895 86.578,40.6562 89,44.5 89.6667,46.5 89.6667,48.5 89,50.5 82.727,61.4398 73.8936,69.6065 62.5,75 46.6089,80.4374 32.2755,77.7708 19.5,67 14.6218,61.7905 10.1218,56.2905 6,50.5 5.33333,48.5 5.33333,46.5 6,44.5 13.5099,31.3509 24.3432,22.3509 38.5,17.5z M39.5,22.5C55.7727,20.8849 68.9393,26.5516 79,39.5 81.0285,42.0292 82.8619,44.6959 84.5,47.5 78.2027,57.9644 69.536,65.7977 58.5,71 41.0714,75.0454 26.9047,69.8787 16,55.5 13.9715,52.9708 12.1381,50.3041 10.5,47.5 17.4558,35.8674 27.1225,27.5341 39.5,22.5z M43.5,38.5C53.6591,37.1581 57.8257,41.4914 56,51.5 53.0579,56.1532 48.8912,57.6532 43.5,56 38.8451,53.1034 37.3451,48.9367 39,43.5 40.025,41.313 41.525,39.6464 43.5,38.5z">
+                            <GeometryDrawing.Brush>
+                                <SolidColorBrush Opacity="0.759" Color="#FF7D7D7D" />
+                            </GeometryDrawing.Brush>
+                        </GeometryDrawing>
+                    </DrawingGroup>
+                    <DrawingGroup Opacity="1">
+                        <GeometryDrawing Geometry="F0 M96,96z M0,0z M41.5,33.5C58.0187,32.1828 64.1853,39.5161 60,55.5 54.2566,61.5986 47.4232,63.0986 39.5,60 33.7803,55.1162 31.9469,48.9495 34,41.5 36.0282,38.3078 38.5282,35.6411 41.5,33.5z M43.5,38.5C41.525,39.6464 40.025,41.313 39,43.5 37.3451,48.9367 38.8451,53.1034 43.5,56 48.8912,57.6532 53.0579,56.1532 56,51.5 57.8257,41.4914 53.6591,37.1581 43.5,38.5z">
+                            <GeometryDrawing.Brush>
+                                <SolidColorBrush Opacity="0.78" Color="#FF7D7D7D" />
+                            </GeometryDrawing.Brush>
+                        </GeometryDrawing>
+                    </DrawingGroup>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <DrawingImage x:Key="img_Client_SDK_Controls_PasswordHide" x:Shared="false">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V100 H100 V0 H0 Z">
+                    <DrawingGroup Opacity="1">
+                        <GeometryDrawing Geometry="F0 M100,100z M0,0z M40.5,15.5C56.5894,12.9751 70.4227,17.3084 82,28.5 82.8333,31.6667 81.6667,32.8333 78.5,32 65.6937,20.2768 51.027,17.2768 34.5,23 29.0664,25.7968 23.8998,28.9635 19,32.5 17.6988,31.9019 16.8655,30.9019 16.5,29.5 20.4355,25.0698 25.1021,21.5698 30.5,19 33.98,17.8974 37.3133,16.7308 40.5,15.5z">
+                            <GeometryDrawing.Brush>
+                                <SolidColorBrush Color="#FF7D7D7D" />
+                            </GeometryDrawing.Brush>
+                        </GeometryDrawing>
+                    </DrawingGroup>
+                    <DrawingGroup Opacity="1">
+                        <GeometryDrawing Geometry="F0 M100,100z M0,0z M89.5,40.5C90.4959,40.4142 91.3292,40.7476 92,41.5 92.6667,43.1667 92.6667,44.8333 92,46.5 89.4045,50.9315 86.2378,54.9315 82.5,58.5 86.6856,62.8513 90.6856,67.3513 94.5,72 93.0696,73.4404 91.403,73.7737 89.5,73 85.9848,69.3176 82.3181,65.8176 78.5,62.5 75.2911,64.2651 72.2911,66.2651 69.5,68.5 71.7046,73.7413 74.038,78.9079 76.5,84 74.8071,86.9517 72.9738,87.1183 71,84.5 68.94,79.3797 66.6067,74.3797 64,69.5 60.017,71.1032 55.8504,71.7698 51.5,71.5 51.5,77.5 51.5,83.5 51.5,89.5 50.1667,89.5 48.8333,89.5 47.5,89.5 47.5,83.5 47.5,77.5 47.5,71.5 43.4838,71.7129 39.6504,71.0462 36,69.5 33.0788,74.3413 30.4121,79.3413 28,84.5 26.6439,85.3802 25.1439,85.7135 23.5,85.5 24.5569,79.2103 26.8903,73.377 30.5,68 27.0589,66.224 23.8922,64.0574 21,61.5 17.1667,65.3333 13.3333,69.1667 9.5,73 8.20677,73.49 6.87344,73.6567 5.5,73.5 7.51628,67.3504 11.1829,62.1838 16.5,58 11.2327,53.5888 7.8994,48.0888 6.5,41.5 8.28801,41.2148 9.95467,41.5481 11.5,42.5 26.6666,66.8714 46.9999,72.7048 72.5,60 79.8099,54.8618 85.4766,48.3618 89.5,40.5z">
+                            <GeometryDrawing.Brush>
+                                <SolidColorBrush Color="#FF7D7D7D" />
+                            </GeometryDrawing.Brush>
+                        </GeometryDrawing>
+                    </DrawingGroup>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+    </Application.Resources>
+</Application>
