@@ -95,7 +95,7 @@ namespace Wpf_PasswordBox
         #endregion
 
         private string _actualtext = string.Empty;
-        private int? _caretIndex;
+        private int _caretIndex;
 
         private bool IsCtrlState => (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
 
@@ -180,7 +180,6 @@ namespace Wpf_PasswordBox
             }
             else
             {
-                _caretIndex = null;
                 _actualtext = string.Empty;
                 Placeholder.Visibility = Visibility.Visible;
             }
@@ -191,12 +190,10 @@ namespace Wpf_PasswordBox
 
                 HideString();
 
-                CaretIndex = _caretIndex.Value;
+                CaretIndex = _caretIndex;
             }
             else
             {
-                _caretIndex = null;
-
                 _actualtext = Text;
             }
 
@@ -256,9 +253,6 @@ namespace Wpf_PasswordBox
             {
                 chars.SetValue('●', i);
             }
-
-            if (!_caretIndex.HasValue)
-                _caretIndex = CaretIndex;
 
             TextChanged -= XPasswordBox_TextChanged;
             Text = new string(chars);
