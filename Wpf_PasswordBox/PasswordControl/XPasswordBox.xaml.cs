@@ -98,6 +98,8 @@ namespace Wpf_PasswordBox
         private bool _isRemoved;
         private int? _caretIndex;
 
+        private bool IsCtrlState => (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
+
         public XPasswordBox()
         {
             InitializeComponent();
@@ -131,6 +133,18 @@ namespace Wpf_PasswordBox
 
             PreviewKeyDown += (s, e) =>
             {
+                if(e.Key == Key.C && IsCtrlState && IconPassword.IsChecked.HasValue && !IconPassword.IsChecked.Value)
+                {
+                    e.Handled = true;
+                    return;
+                }
+
+                if (e.Key == Key.Z && IsCtrlState)
+                {
+                    e.Handled = true;
+                    return;
+                }
+
                 if (e.Key == Key.Back && IconPassword.IsChecked.HasValue && !IconPassword.IsChecked.Value)
                 {
                     _caretIndex = CaretIndex;
@@ -181,8 +195,15 @@ namespace Wpf_PasswordBox
 
             if (IconPassword.IsChecked.HasValue && !IconPassword.IsChecked.Value)
             {
+                _caretIndex = CaretIndex;
+
                 HideString();
 
+                if(_caretIndex <= Text.Length)
+                {
+                    CaretIndex = _caretIndex.Value;
+                }
+                else
                 if (!_isRemoved)
                 {
                     _caretIndex = _caretIndex.Value + 1;
@@ -241,7 +262,12 @@ namespace Wpf_PasswordBox
             var aggreText = Text.Where(c => !c.Equals('●')).Aggregate("", (current, c) => current + c);
 
             if (!string.IsNullOrEmpty(aggreText) && !Text.Equals(_actualtext))
-                _actualtext += aggreText;
+            {
+                if (_actualtext.Length >= CaretIndex - 1)
+                    _actualtext = _actualtext.Insert(CaretIndex - 1, aggreText);
+                else
+                    _actualtext = _actualtext.Insert(CaretIndex - aggreText.Length, aggreText);
+            }
 
             char[] chars = new char[Text.Length];
 
