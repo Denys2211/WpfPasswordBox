@@ -239,6 +239,11 @@ namespace Wpf_PasswordBox
         {
             var aggreText = Text.Where(c => !c.Equals('●')).Aggregate("", (current, c) => current + c);
 
+            if (Text.Length < _actualtext.Length)
+            {
+                _actualtext = _actualtext?.Remove(CaretIndex - aggreText.Length, _actualtext.Length - Text.Length + 1);
+            }
+
             if (!string.IsNullOrEmpty(aggreText) && !Text.Equals(_actualtext))
             {
                 if (_actualtext.Length >= CaretIndex - 1)
