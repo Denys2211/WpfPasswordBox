@@ -95,6 +95,7 @@ namespace Wpf_PasswordBox
         #endregion
 
         private string _actualtext = string.Empty;
+        private string _selectedtext = string.Empty;
         private int _caretIndex;
 
         private bool IsCtrlState => (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
@@ -132,13 +133,21 @@ namespace Wpf_PasswordBox
 
             PreviewKeyDown += (s, e) =>
             {
-                if(e.Key == Key.C && IsCtrlState && IconPassword.IsChecked.HasValue && !IconPassword.IsChecked.Value)
+                _selectedtext = SelectedText; 
+
+                if (e.Key == Key.C && IsCtrlState && IconPassword.IsChecked.HasValue && !IconPassword.IsChecked.Value)
                 {
                     e.Handled = true;
                     return;
                 }
 
-                if (e.Key == Key.Z && IsCtrlState)
+                if (e.Key == Key.X && IsCtrlState && IconPassword.IsChecked.HasValue && !IconPassword.IsChecked.Value)
+                {
+                    e.Handled = true;
+                    return;
+                }
+
+                if (e.Key == Key.Z && IsCtrlState && IconPassword.IsChecked.HasValue && !IconPassword.IsChecked.Value)
                 {
                     e.Handled = true;
                     return;
@@ -239,15 +248,16 @@ namespace Wpf_PasswordBox
         {
             var aggreText = Text.Where(c => !c.Equals('●')).Aggregate("", (current, c) => current + c);
 
-            if (Text.Length < _actualtext.Length)
+            if (!string.IsNullOrEmpty(_selectedtext))
             {
-                _actualtext = _actualtext?.Remove(CaretIndex - aggreText.Length, _actualtext.Length - Text.Length + 1);
+                _actualtext = _actualtext?.Remove(CaretIndex - aggreText.Length, _selectedtext.Length);
+                _selectedtext = string.Empty;
             }
 
             if (!string.IsNullOrEmpty(aggreText) && !Text.Equals(_actualtext))
             {
-                if (_actualtext.Length >= CaretIndex - 1)
-                    _actualtext = _actualtext.Insert(CaretIndex - 1, aggreText);
+                if (_actualtext.Length > Text.Length)
+                    _actualtext = _actualtext.Insert(CaretIndex - aggreText.Length, aggreText);
                 else
                     _actualtext = _actualtext.Insert(CaretIndex - aggreText.Length, aggreText);
             }
