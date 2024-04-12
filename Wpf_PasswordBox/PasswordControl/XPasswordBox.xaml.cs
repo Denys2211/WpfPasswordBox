@@ -158,6 +158,7 @@ namespace Wpf_PasswordBox
                     if (!string.IsNullOrEmpty(SelectedText))
                     {
                         _actualtext = _actualtext?.Remove(CaretIndex, SelectedText.Length);
+                        _selectedtext = string.Empty;
                     }
                     else
                     if (CaretIndex > 0)
@@ -171,6 +172,7 @@ namespace Wpf_PasswordBox
                     if (!string.IsNullOrEmpty(SelectedText))
                     {
                         _actualtext = _actualtext?.Remove(CaretIndex, SelectedText.Length);
+                        _selectedtext = string.Empty;
                     }
                     else
                     if (CaretIndex < _actualtext.Length)
@@ -203,6 +205,7 @@ namespace Wpf_PasswordBox
             }
             else
             {
+                _selectedtext = SelectedText;
                 _actualtext = Text;
             }
 
@@ -256,10 +259,7 @@ namespace Wpf_PasswordBox
 
             if (!string.IsNullOrEmpty(aggreText) && !Text.Equals(_actualtext))
             {
-                if (_actualtext.Length > Text.Length)
-                    _actualtext = _actualtext.Insert(CaretIndex - aggreText.Length, aggreText);
-                else
-                    _actualtext = _actualtext.Insert(CaretIndex - aggreText.Length, aggreText);
+                _actualtext = _actualtext.Insert(CaretIndex - aggreText.Length, aggreText);
             }
 
             char[] chars = new char[Text.Length];
