@@ -95,7 +95,6 @@ namespace Wpf_PasswordBox
         #endregion
 
         private string _actualtext = string.Empty;
-        private bool _isRemoved;
         private int? _caretIndex;
 
         private bool IsCtrlState => (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
@@ -147,33 +146,26 @@ namespace Wpf_PasswordBox
 
                 if (e.Key == Key.Back && IconPassword.IsChecked.HasValue && !IconPassword.IsChecked.Value)
                 {
-                    _caretIndex = CaretIndex;
-
                     if (!string.IsNullOrEmpty(SelectedText))
                     {
-                        _isRemoved = true;
                         _actualtext = _actualtext?.Remove(CaretIndex, SelectedText.Length);
                     }
                     else
                     if (CaretIndex > 0)
                     {
-                        _isRemoved = true;
                         _actualtext = _actualtext?.Remove(CaretIndex - 1, 1);
                     }
                 }
 
                 if (e.Key == Key.Delete && IconPassword.IsChecked.HasValue && !IconPassword.IsChecked.Value && string.IsNullOrEmpty(SelectedText))
                 {
-                    _caretIndex = CaretIndex;
-
                     if (!string.IsNullOrEmpty(SelectedText))
                     {
-                        _isRemoved = true;
                         _actualtext = _actualtext?.Remove(CaretIndex, SelectedText.Length);
                     }
                     else
+                    if (CaretIndex < _actualtext.Length)
                     {
-                        _isRemoved = true;
                         _actualtext = _actualtext?.Remove(CaretIndex, 1);
                     }
                 }
@@ -199,18 +191,7 @@ namespace Wpf_PasswordBox
 
                 HideString();
 
-                if(_caretIndex <= Text.Length)
-                {
-                    CaretIndex = _caretIndex.Value;
-                }
-                else
-                if (!_isRemoved)
-                {
-                    _caretIndex = _caretIndex.Value + 1;
-                    CaretIndex = _caretIndex.Value;
-                }
-
-                _isRemoved = false;
+                CaretIndex = _caretIndex.Value;
             }
             else
             {
